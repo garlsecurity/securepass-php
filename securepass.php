@@ -6,10 +6,10 @@
      **
      **/ 
 
-    $endpoint = "http://localhost:8000/";
+    $endpoint = "https://beta.secure-pass.net/"
     $api = "/api/v1/ping";
-    $app_id = "test";
-    $app_secret = "test";
+    $app_id = "your_app_id";
+    $app_secret = "your_app_secret";
  
     // is cURL installed yet?
     if (!function_exists('curl_init')){
