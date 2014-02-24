@@ -23,7 +23,7 @@ class SecurePass {
     }
 
 
-    function SendRequest($method, $path) {
+    function SendRequest($path, $content = NULL) {
  
         // is cURL installed yet?
         if (!function_exists('curl_init')){
@@ -57,6 +57,12 @@ class SecurePass {
             "X-SecurePass-App-ID: " . $this->app_id,
             "X-SecurePass-App-Secret: " . $this->app_secret
         ));
+
+        // Send data
+        if ($content != NULL) {
+             curl_setopt($ch, CURLOPT_POST, true);
+             curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($content));
+        }
  
         // Download the given URL, and return output
         $output = json_decode(curl_exec($ch), true);
@@ -71,19 +77,60 @@ class SecurePass {
 
     // Ping SecurePass service
     function ping() {
-        $result = $this->SendRequest("GET", "/api/v1/ping");
+        $result = $this->SendRequest("/api/v1/ping");
 
         // If we have a non zero result, let's fire an error
-        if ($result['rc'] == 0) {
-           unset($result['rc']);
-           unset($result['errorMsg']);
+        if ($result["rc"] == 0) {
+           unset($result["rc"]);
+           unset($result["errorMsg"]);
    
            return $result;
         }
         else {
-           die($result['errorMsg']);
+           die($result["errorMsg"]);
         }
 
+    }
+
+   
+    // Authenticate
+    function user_auth($username, $secret) {
+        $request = array (
+		"USERNAME" => $username,
+		"SECRET"   => $secret,
+        );
+
+        $result = $this->SendRequest("/api/v1/users/auth", $request);
+
+        // If we have a non zero result, let's fire an error
+        if ($result["rc"] == 0) {
+           return $result["authenticated"];
+        }
+        else {
+           die($result["errorMsg"]);
+        }
+
+    }
+
+
+    // Get user information
+    function user_info($username) {
+        $request = array (
+		"USERNAME" => $username,
+        );
+
+        $result = $this->SendRequest("/api/v1/users/info", $request);
+
+        // If we have a non zero result, let's fire an error
+        if ($result["rc"] == 0) {
+           unset($result["rc"]);
+           unset($result["errorMsg"]);
+   
+           return $result;
+        }
+        else {
+           die($result["errorMsg"]);
+        }
     }
  
 }
