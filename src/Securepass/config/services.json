@@ -1,0 +1,52 @@
+{
+    "name": "Securepass",
+    "baseUrl": "https://beta.secure-pass.net",
+    "version": "",
+    "description": "Securepass API",
+    "operations": {
+        "Ping": {
+            "httpMethod": "GET",
+            "uri": "/api/v1/ping",
+            "summary": "Ping SecurePass service",
+            "responseClass": "PingOutput"
+        },
+        "UsersInfo": {
+            "httpMethod": "POST",
+            "uri": "/api/v1/users/info",
+            "summary": "Get user information",
+            "responseClass": "UsersInfoOutput",
+            "parameters": {
+                "username": {
+                    "type": "string",
+                    "location": "postField",
+                    "description": "User information to retrieve by username",
+                    "required": true
+                }
+            }
+        },
+    },
+    "models": {
+      "PingOutput": {
+        "type": "array",
+        "properties": {
+          "ip": {
+            "location": "json",
+            "type": "string"
+          }
+          "ip_version": {
+            "location": "json",
+            "type": "integer"
+          }
+        }
+      },
+      "UsersInfoOutput": {
+        "type": "array",
+        "properties": {
+          "name": {
+            "location": "json",
+            "type": "string"
+          },
+        }
+      }
+    }
+}

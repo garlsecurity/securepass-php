@@ -1,0 +1,26 @@
+{
+    "name": "twinbit/securepass-php",
+    "description":"Securepass SDK for PHP",
+    "keywords":["securepass", "sdk"],
+    "type":"library",
+    "license":"GPL-2.0",
+    "authors": [
+        {
+            "name": "Paolo Mainardi",
+            "email": "paolo@twinbit.it",
+            "homepage": "http://www.twinbit.it"
+        }
+    ],
+    "homepage": "http://www.secure-pass.net",
+    "require": {
+      "guzzle/guzzle": "3.8.*@dev",
+      "symfony/yaml": "2.4.*@dev",
+      "symfony/config": "2.5.*@dev",
+      "php":">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "Securepass": "src/"
+        }
+    }
+}
