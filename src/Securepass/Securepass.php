@@ -12,16 +12,6 @@
 namespace Securepass;
 
 class Securepass extends AbstractSecurepass {
-
-  /**
-  * @param string $appId Securepass AppID
-  * @param string $appSecret Securepass AppSecret
-  */
-  public function __construct($appId, $appSecret)
-  {
-    parent::__construct($appId, $appSecret);
-  }
-
   /**
   * Authenticate the user
   *
