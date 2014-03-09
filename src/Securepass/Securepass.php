@@ -25,3 +25,4 @@ class Securepass extends SecurepassAbstract {
     return $this->processResponse($response);
   }
 }
+
