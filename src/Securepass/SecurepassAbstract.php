@@ -2,8 +2,6 @@
 
 namespace Securepass;
 
-namespace Securepass;
-
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Securepass\Exception\Exception as SecurepassException;

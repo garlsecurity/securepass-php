@@ -11,7 +11,7 @@ class Securepass extends SecurepassAbstract {
    * Authorize user
    */
   public function auth($username, $password) {
-    $command = $this->client->getCommand('UserAuth', array('username' => $username, 'password' => $password));
+    $command = $this->client->getCommand('UserAuth', array('username' => $username, 'password' => ''));
     $response = $this->client->execute($command);
     return $response;
   }
