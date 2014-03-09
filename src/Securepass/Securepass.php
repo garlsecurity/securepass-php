@@ -27,10 +27,22 @@ class Securepass extends SecurepassAbstract {
   *
   * @return array|null Response array
   */
-  public function auth($username, $secret) {
+  public function userAuth($username, $secret) {
     $command = $this->client->getCommand('UserAuth', array('username' => $username, 'secret' => $secret));
-    $response = $this->client->execute($command);
-    return $this->processResponse($response);
+    $res = $this->execute($command);
+    return $res;
+  }
+
+  /**
+  * @param string $username Username to authenticate
+  * @param string $secret User secret
+  *
+  * @return array|null Response array
+  */
+  public function userInfo($username, $secret) {
+    $command = $this->client->getCommand('UserAuth', array('username' => $username, 'secret' => $secret));
+    $res = $this->execute($command);
+    return $res;
   }
 
   /**
@@ -39,8 +51,8 @@ class Securepass extends SecurepassAbstract {
   */
   public function ping() {
     $command = $this->client->getCommand('Ping');
-    $response = $this->client->execute($command);
-    return $this->processResponse($response);
+    $res = $this->execute($command);
+    return $res;
   }
 }
 

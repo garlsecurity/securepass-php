@@ -49,27 +49,32 @@ abstract Class SecurepassAbstract {
   }
 
   /**
-  * Process response, throw errors if any and returns data array.
+  * @param \Guzzle\Service\Command\OperationCommand $command Guzzle operation command
   *
-  * @param \Guzzle\Service\Resource\Mode $response Response object from Guzzle client
-  * @return array|null Response array
+  * @throws SecurepassException
   */
-  protected function processResponse(\Guzzle\Service\Resource\Model $response) {
+  protected function execute(\Guzzle\Service\Command\OperationCommand $command) {
+    $response = $this->client->execute($command);
     $data = $response->toArray();
 
     // Return code value, it is always 0 if returned successfully (https://beta.secure-pass.net/trac/wiki/GeneralRules)
     if ($data['rc']) {
-      if ($data['errorMsg']) {
-        $this->error = $data['errorMsg'];
-      }
-      else {
-        $this->error = 'Connection error, please try again.';
-      }
-      throw new SecurepassException($this->error);
+      $this->error = 'Something goes wrong, error: "%s"';
+      throw new SecurepassException(sprintf($this->error, $data['errorMsg']));
     }
+    return $this->processResponse($data);
+  }
+
+  /**
+  * Process response, throw errors if any and returns data array.
+  *
+  * @param Array $response Reponse from the client
+  * @return array|null Response array
+  */
+  protected function processResponse(Array $response) {
     // unset connection specific data
-    unset($data['rc']);
-    unset($data['errorMsg']);
-    return $data;
+    unset($response['rc']);
+    unset($response['errorMsg']);
+    return $response;
   }
 }
