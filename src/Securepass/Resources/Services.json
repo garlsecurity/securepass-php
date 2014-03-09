@@ -32,11 +32,11 @@
               }
           }
       },
-      "UsersInfo": {
+      "UserInfo": {
           "httpMethod": "POST",
           "uri": "/api/v1/users/info",
           "summary": "Get user information",
-          "responseClass": "UsersInfoOutput",
+          "responseClass": "UserInfoOutput",
           "parameters": {
               "username": {
                   "type": "string",
@@ -62,7 +62,7 @@
         }
       }
     },
-    "UsersInfoOutput": {
+    "UserInfoOutput": {
       "type": "object",
       "properties": {
         "name": {

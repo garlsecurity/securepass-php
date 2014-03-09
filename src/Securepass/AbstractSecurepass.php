@@ -15,7 +15,7 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Securepass\Exception\Exception as SecurepassException;
 
-abstract Class SecurepassAbstract {
+abstract Class AbstractSecurepass {
   protected $client, $error;
 
   /**
@@ -35,13 +35,19 @@ abstract Class SecurepassAbstract {
 
     // load services description
     $this->setServiceDescription();
+
+    // check if everything works as expected, ping Securepass API.
+    $this->ping();
   }
 
+ /**
+  *  Set Guzzle Securepass services description file
+  */
   protected function setServiceDescription() {
     $configs = array();
 
     // load service description file
-    $serviceDescriptionFile = __DIR__ . '/config/services.json';
+    $serviceDescriptionFile = __DIR__ . '/Resources/services.json';
 
     // set service description
     $descriptions = ServiceDescription::factory($serviceDescriptionFile);

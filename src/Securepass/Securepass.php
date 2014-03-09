@@ -11,7 +11,7 @@
 
 namespace Securepass;
 
-class Securepass extends SecurepassAbstract {
+class Securepass extends AbstractSecurepass {
 
   /**
   * @param string $appId Securepass AppID
@@ -22,6 +22,8 @@ class Securepass extends SecurepassAbstract {
   }
 
   /**
+  * Authenticate the user
+  *
   * @param string $username Username to authenticate
   * @param string $secret User secret
   *
@@ -34,18 +36,20 @@ class Securepass extends SecurepassAbstract {
   }
 
   /**
-  * @param string $username Username to authenticate
-  * @param string $secret User secret
+  * Get user informations.
+  *
+  * @param string $username Securepass username
   *
   * @return array|null Response array
   */
-  public function userInfo($username, $secret) {
-    $command = $this->client->getCommand('UserAuth', array('username' => $username, 'secret' => $secret));
+  public function userInfo($username) {
+    $command = $this->client->getCommand('UserInfo', array('username' => $username));
     $res = $this->execute($command);
     return $res;
   }
 
   /**
+  * Ping Securepass API
   *
   * @return array|null Response array
   */
