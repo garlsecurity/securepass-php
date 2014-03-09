@@ -1,7 +1,7 @@
 {
   "name": "Securepass",
   "baseUrl": "https://beta.secure-pass.net",
-  "version": "asdfasdf",
+  "version": "v1-beta",
   "description": "Securepass API",
   "operations": {
       "Ping": {
@@ -23,7 +23,7 @@
                   "required": true,
                   "sentAs": "USERNAME"
               },
-              "password": {
+              "secret": {
                   "type": "string",
                   "location": "postField",
                   "description": "Password",

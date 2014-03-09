@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Securepass package.
+ *
+ * (c) Paolo Mainardi <paolo@twinbit.it>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Securepass;
 
 use Guzzle\Service\Client;
@@ -9,6 +18,10 @@ use Securepass\Exception\Exception as SecurepassException;
 abstract Class SecurepassAbstract {
   protected $client, $error;
 
+  /**
+  * @param string $appId Securepass AppID
+  * @param string $appSecret Securepass AppSecret
+  */
   public function __construct($appId, $appSecret) {
     $this->client = new Client();
 
@@ -35,6 +48,12 @@ abstract Class SecurepassAbstract {
     $this->client->setDescription($descriptions);
   }
 
+  /**
+  * Process response, throw errors if any and returns data array.
+  *
+  * @param \Guzzle\Service\Resource\Mode $response Response object from Guzzle client
+  * @return array|null Response array
+  */
   protected function processResponse(\Guzzle\Service\Resource\Model $response) {
     $data = $response->toArray();
 
