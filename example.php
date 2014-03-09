@@ -1,20 +1,12 @@
 <?php
-  include("securepass.php");
 
-  $test = new SecurePass('app_id', 'app_secret');
+require 'vendor/autoload.php';
 
-  // Ping :)
-  $res = $test->ping();
-  echo "Ping received on IPv" . $res['ip_version'] . " from " . $res['ip'] . "\n"; 
+use Securepass\Securepass;
 
-  // Authenticate
-  if ($test->user_auth('user', 'secret')) {
-     echo "Authenticated\n";
-  }
-  else {
-     echo "Access Denied\n";
-  }
+$app_id = YOUR_APP_ID;
+$app_secret = YOUR_APP_SECRET;
 
-  // Info user
-  var_dump($test->user_info('user'));
-?>
+$client = new Securepass($app_id, $app_secret);
+$res = $client->ping();
+$auth = $client->auth(USERNAME, PASSWORD);
