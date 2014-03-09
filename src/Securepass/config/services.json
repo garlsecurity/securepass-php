@@ -1,52 +1,86 @@
 {
-    "name": "Securepass",
-    "baseUrl": "https://beta.secure-pass.net",
-    "version": "",
-    "description": "Securepass API",
-    "operations": {
-        "Ping": {
-            "httpMethod": "GET",
-            "uri": "/api/v1/ping",
-            "summary": "Ping SecurePass service",
-            "responseClass": "PingOutput"
-        },
-        "UsersInfo": {
-            "httpMethod": "POST",
-            "uri": "/api/v1/users/info",
-            "summary": "Get user information",
-            "responseClass": "UsersInfoOutput",
-            "parameters": {
-                "username": {
-                    "type": "string",
-                    "location": "postField",
-                    "description": "User information to retrieve by username",
-                    "required": true
-                }
-            }
-        },
-    },
-    "models": {
-      "PingOutput": {
-        "type": "array",
-        "properties": {
-          "ip": {
-            "location": "json",
-            "type": "string"
-          }
-          "ip_version": {
-            "location": "json",
-            "type": "integer"
-          }
-        }
+  "name": "Securepass",
+  "baseUrl": "https://beta.secure-pass.net",
+  "version": "asdfasdf",
+  "description": "Securepass API",
+  "operations": {
+      "Ping": {
+          "httpMethod": "GET",
+          "uri": "/api/v1/ping",
+          "summary": "Ping SecurePass service",
+          "responseClass": "PingOutput"
       },
-      "UsersInfoOutput": {
-        "type": "array",
-        "properties": {
-          "name": {
-            "location": "json",
-            "type": "string"
-          },
+      "UserAuth": {
+          "httpMethod": "POST",
+          "uri": "/api/v1/users/auth",
+          "summary": "Autenticate user",
+          "responseClass": "UserAuthOutput",
+          "parameters": {
+              "username": {
+                  "type": "string",
+                  "location": "postField",
+                  "description": "Username",
+                  "required": true,
+                  "sentAs": "USERNAME"
+              },
+              "password": {
+                  "type": "string",
+                  "location": "postField",
+                  "description": "Password",
+                  "required": true,
+                  "sentAs": "SECRET"
+              }
+          }
+      },
+      "UsersInfo": {
+          "httpMethod": "POST",
+          "uri": "/api/v1/users/info",
+          "summary": "Get user information",
+          "responseClass": "UsersInfoOutput",
+          "parameters": {
+              "username": {
+                  "type": "string",
+                  "location": "postField",
+                  "description": "User information to retrieve by username",
+                  "required": true,
+                  "sentAs": "USERNAME"
+              }
+          }
+      }
+  },
+  "models": {
+    "PingOutput": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "location": "json",
+          "type": "string"
+        },
+        "ip_version": {
+          "location": "json",
+          "type": "string"
         }
       }
+    },
+    "UsersInfoOutput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "location": "json",
+          "type": "string"
+        }
+      }
+    },
+    "UserAuthOutput": {
+      "type": "object",
+      "properties": {
+         "authenticated": {
+           "location": "json",
+           "type": "boolean"
+         }
+      }
     }
+  }
 }
+
+
