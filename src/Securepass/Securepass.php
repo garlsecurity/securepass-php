@@ -17,7 +17,8 @@ class Securepass extends AbstractSecurepass {
   * @param string $appId Securepass AppID
   * @param string $appSecret Securepass AppSecret
   */
-  public function __construct($appId, $appSecret) {
+  public function __construct($appId, $appSecret)
+  {
     parent::__construct($appId, $appSecret);
   }
 
@@ -29,7 +30,8 @@ class Securepass extends AbstractSecurepass {
   *
   * @return array|null Response array
   */
-  public function userAuth($username, $secret) {
+  public function userAuth($username, $secret)
+  {
     $command = $this->client->getCommand('UserAuth', array('username' => $username, 'secret' => $secret));
     $res = $this->execute($command);
     return $res;
@@ -42,7 +44,8 @@ class Securepass extends AbstractSecurepass {
   *
   * @return array|null Response array
   */
-  public function userInfo($username) {
+  public function userInfo($username)
+  {
     $command = $this->client->getCommand('UserInfo', array('username' => $username));
     $res = $this->execute($command);
     return $res;
@@ -53,7 +56,8 @@ class Securepass extends AbstractSecurepass {
   *
   * @return array|null Response array
   */
-  public function ping() {
+  public function ping()
+  {
     $command = $this->client->getCommand('Ping');
     $res = $this->execute($command);
     return $res;

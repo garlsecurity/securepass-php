@@ -22,7 +22,8 @@ abstract Class AbstractSecurepass {
   * @param string $appId Securepass AppID
   * @param string $appSecret Securepass AppSecret
   */
-  public function __construct($appId, $appSecret) {
+  public function __construct($appId, $appSecret)
+  {
     $this->client = new Client();
 
     // set Securepass deafult headers
@@ -43,7 +44,8 @@ abstract Class AbstractSecurepass {
  /**
   *  Set Guzzle Securepass services description file
   */
-  protected function setServiceDescription() {
+  protected function setServiceDescription()
+  {
     $configs = array();
 
     // load service description file
@@ -59,7 +61,8 @@ abstract Class AbstractSecurepass {
   *
   * @throws SecurepassException
   */
-  protected function execute(\Guzzle\Service\Command\OperationCommand $command) {
+  protected function execute(\Guzzle\Service\Command\OperationCommand $command)
+  {
     $response = $this->client->execute($command);
     $data = $response->toArray();
 
@@ -77,7 +80,8 @@ abstract Class AbstractSecurepass {
   * @param Array $response Reponse from the client
   * @return array|null Response array
   */
-  protected function processResponse(Array $response) {
+  protected function processResponse(Array $response)
+  {
     // unset connection specific data
     unset($response['rc']);
     unset($response['errorMsg']);
