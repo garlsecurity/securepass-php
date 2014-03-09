@@ -32,6 +32,25 @@
               }
           }
       },
+      "UserAdd": {
+        "httpMethod": "GET",
+        "uri": "/api/v1/users/add",
+        "summary": "Add a user to the realm",
+        "responseClass": "UserAddOutput",
+        "parameters": {
+
+        }
+
+      },
+      "UserDelete": {
+
+      },
+      "UsersList": {
+
+      },
+      "UserProvision": {
+
+      },
       "UserInfo": {
           "httpMethod": "POST",
           "uri": "/api/v1/users/info",
