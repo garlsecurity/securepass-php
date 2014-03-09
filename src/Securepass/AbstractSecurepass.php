@@ -15,7 +15,7 @@ use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Securepass\Exception\Exception as SecurepassException;
 
-abstract Class AbstractSecurepass extends Client {
+abstract Class AbstractSecurepass {
   protected $client, $error;
 
   /**
