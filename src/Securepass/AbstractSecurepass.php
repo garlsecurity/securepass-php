@@ -11,6 +11,7 @@
 
 namespace Securepass;
 
+use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Securepass\Exception\Exception as SecurepassException;
@@ -18,17 +19,33 @@ use Securepass\Exception\Exception as SecurepassException;
 abstract Class AbstractSecurepass {
   protected $client, $error;
 
-  /**
-  * @param string $appId Securepass AppID
-  * @param string $appSecret Securepass AppSecret
+  const BASE_URL = "https://beta.secure-pass.net";
+
+ /**
+  * Create Securepass client using Guzzle
+  *
+  * @param array $config Client Configuration options
+  *
   */
-  public function __construct($appId, $appSecret)
+  public function __construct($config = array())
   {
-    $this->client = new Client();
+    $default = array('base_url' => self::BASE_URL);
+
+    // The following values are required when creating the client
+    $required = array(
+        'base_url',
+        'app_id',
+        'app_secret'
+    );
+
+    $config = Collection::fromConfig($config, $default, $required);
+
+    // Create a new Securepass client
+    $this->client = new Client($config->get('base_url'), $config);
 
     // set Securepass deafult headers
-    $this->client->setDefaultOption('headers/X-SecurePass-App-ID', $appId);
-    $this->client->setDefaultOption('headers/X-SecurePass-App-Secret', $appSecret);
+    $this->client->setDefaultOption('headers/X-SecurePass-App-ID', $config->get('app_id'));
+    $this->client->setDefaultOption('headers/X-SecurePass-App-Secret', $config->get('app_secret'));
     $this->client->setDefaultOption('headers/Content-type', 'application/json');
 
     // set Useragent
@@ -36,9 +53,6 @@ abstract Class AbstractSecurepass {
 
     // load services description
     $this->setServiceDescription();
-
-    // check if everything works as expected, ping Securepass API.
-    $this->ping();
   }
 
  /**
@@ -46,8 +60,6 @@ abstract Class AbstractSecurepass {
   */
   protected function setServiceDescription()
   {
-    $configs = array();
-
     // load service description file
     $serviceDescriptionFile = __DIR__ . '/Resources/services.json';
 
@@ -87,4 +99,9 @@ abstract Class AbstractSecurepass {
     unset($response['errorMsg']);
     return $response;
   }
+
+  public function getClient() {
+    return $this->client;
+  }
 }
+

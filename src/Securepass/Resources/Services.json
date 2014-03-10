@@ -1,6 +1,5 @@
 {
   "name": "Securepass",
-  "baseUrl": "https://beta.secure-pass.net",
   "version": "v1-beta",
   "description": "Securepass API",
   "operations": {
@@ -36,20 +35,13 @@
         "httpMethod": "GET",
         "uri": "/api/v1/users/add",
         "summary": "Add a user to the realm",
-        "responseClass": "UserAddOutput",
-        "parameters": {
-
-        }
-
+        "responseClass": "UserAddOutput"
       },
       "UserDelete": {
-
       },
       "UsersList": {
-
       },
       "UserProvision": {
-
       },
       "UserInfo": {
           "httpMethod": "POST",
