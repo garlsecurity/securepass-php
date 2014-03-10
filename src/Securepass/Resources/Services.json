@@ -35,13 +35,124 @@
         "httpMethod": "GET",
         "uri": "/api/v1/users/add",
         "summary": "Add a user to the realm",
-        "responseClass": "UserAddOutput"
+        "responseClass": "UserAddOutput",
+        "parameters": {
+           "username": {
+                "type": "string",
+                "location": "postField",
+                "description": "Username",
+                "required": true,
+                "sentAs": "USERNAME"
+           },
+           "name": {
+                "type": "string",
+                "location": "postField",
+                "description": "Name",
+                "required": true,
+                "sentAs": "NAME"
+           },
+           "surname": {
+                "type": "string",
+                "location": "postField",
+                "description": "Surname",
+                "required": true,
+                "sentAs": "SURNAME"
+           },
+           "email": {
+                "type": "string",
+                "location": "postField",
+                "description": "Email",
+                "required": true,
+                "sentAs": "EMAIL"
+           },
+           "mobile": {
+                "type": "string",
+                "location": "postField",
+                "description": "Mobile number",
+                "required": true,
+                "sentAs": "mobile"
+           },
+           "nin": {
+                "type": "string",
+                "location": "postField",
+                "description": "User's National Identification Number",
+                "required": false,
+                "sentAs": "NIN"
+           },
+           "rfid": {
+                "type": "string",
+                "location": "postField",
+                "description": "User's RFID tag (for doors, etc..)",
+                "required": false,
+                "sentAs": "RFID"
+           },
+           "type": {
+                "type": "string",
+                "location": "postField",
+                "description": "User's type of token (default software, hardware lowercase)",
+                "required": false,
+                "sentAs": "TYPE"
+           },
+           "manager": {
+                "type": "string",
+                "location": "postField",
+                "description": "Username of user's manager",
+                "required": false,
+                "sentAs": "MANAGER"
+           }
+        }
       },
       "UserDelete": {
+        "httpMethod": "POST",
+        "uri": "/api/v1/users/delete",
+        "summary": "Delete a user from the userbase",
+        "responseClass": "UserListOutput",
+        "parameters": {
+          "username": {
+            "type": "string",
+            "location": "postField",
+            "description": "Username to be deleted",
+            "required": false,
+            "sentAs": "USERNAME"
+          }
+        }
       },
       "UsersList": {
+        "httpMethod": "POST",
+        "uri": "/api/v1/users/list",
+        "summary": "Show the list of users in a given realm",
+        "responseClass": "UserListOutput",
+        "parameters": {
+          "realm": {
+            "type": "string",
+            "location": "postField",
+            "description": "set alternative realm, if app has *",
+            "required": false,
+            "sentAs": "REALM"
+          }
+        }
       },
       "UserProvision": {
+          "httpMethod": "POST",
+          "uri": "/api/v1/users/token/provision",
+          "summary": "Provision a token for the given username",
+          "responseClass": "UserProvisionOutput",
+          "parameters": {
+              "username": {
+                "type": "string",
+                "location": "postField",
+                "description": "Username to be provisioned",
+                "required": true,
+                "sentAs": "USERNAME"
+              },
+              "swtoken": {
+                "type": "string",
+                "location": "postField",
+                "description": "iphone, android, blackberry, software",
+                "required": true,
+                "sentAs": "SWTOKEN"
+              }
+          }
       },
       "UserInfo": {
           "httpMethod": "POST",
