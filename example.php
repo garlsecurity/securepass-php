@@ -7,6 +7,19 @@ use Securepass\Securepass;
 $app_id = YOUR_APP_ID;
 $app_secret = YOUR_APP_SECRET;
 
-$client = new Securepass($app_id, $app_secret);
-$res = $client->ping();
-$auth = $client->auth(USERNAME, PASSWORD);
+// base options
+$config = array(
+  'app_id'     => $app_id,
+  'app_secret' => $app_secret
+);
+
+// configure a proxy
+$config['request.options']['proxy'] = 'http://proxy.local';
+
+// override base_url
+$config['base_url'] = 'http://securepass.local';
+
+$securepass = new Securepass($options);
+
+$res = $securepass->ping();
+$auth = $securepass->auth(USERNAME, PASSWORD);
