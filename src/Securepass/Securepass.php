@@ -12,6 +12,7 @@
 namespace Securepass;
 
 class Securepass extends AbstractSecurepass {
+
   /**
   * Authenticate the user
   *
@@ -52,5 +53,6 @@ class Securepass extends AbstractSecurepass {
     $res = $this->execute($command);
     return $res;
   }
+
 }
 
