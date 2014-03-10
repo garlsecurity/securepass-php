@@ -15,6 +15,7 @@ use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
 use Guzzle\Plugin\Backoff\BackoffPlugin;
+use Guzzle\Service\Command\OperationCommand;
 
 use Securepass\Exception\Exception as SecurepassException;
 
@@ -84,11 +85,11 @@ abstract Class AbstractSecurepass {
   }
 
   /**
-  * @param \Guzzle\Service\Command\OperationCommand $command Guzzle operation command
+  * @param OperationCommand $command Guzzle operation command
   *
   * @throws SecurepassException
   */
-  protected function execute(\Guzzle\Service\Command\OperationCommand $command)
+  protected function execute(OperationCommand $command)
   {
     $response = $this->client->execute($command);
     $data = $response->toArray();
