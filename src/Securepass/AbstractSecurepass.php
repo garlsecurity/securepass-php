@@ -14,10 +14,12 @@ namespace Securepass;
 use Guzzle\Common\Collection;
 use Guzzle\Service\Client;
 use Guzzle\Service\Description\ServiceDescription;
+use Guzzle\Plugin\Backoff\BackoffPlugin;
+
 use Securepass\Exception\Exception as SecurepassException;
 
 abstract Class AbstractSecurepass {
-  protected $client, $error;
+  protected $client, $error, $history;
 
   const BASE_URL = "https://beta.secure-pass.net";
 
@@ -53,6 +55,19 @@ abstract Class AbstractSecurepass {
 
     // load services description
     $this->setServiceDescription();
+
+    // Use a static factory method to get a backoff plugin using the exponential backoff strategy
+    $backoffPlugin = BackoffPlugin::getExponentialBackoff();
+
+    // Add the backoff plugin to the client object
+    $this->client->addSubscriber($backoffPlugin);
+  }
+
+  /**
+   * @return Object GuzzleClient instance
+   */
+  public function getClient() {
+    return $this->client;
   }
 
  /**
@@ -100,8 +115,5 @@ abstract Class AbstractSecurepass {
     return $response;
   }
 
-  public function getClient() {
-    return $this->client;
-  }
 }
 
