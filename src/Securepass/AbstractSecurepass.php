@@ -91,8 +91,10 @@ abstract Class AbstractSecurepass {
   */
   protected function execute(OperationCommand $command)
   {
-    $response = $this->client->execute($command);
-    $data = $response->toArray();
+    $data = $this->client->execute($command);
+    if (!is_array($data)) {
+      $data = $data->toArray();
+    }
 
     // Return code value, it is always 0 if returned successfully (https://beta.secure-pass.net/trac/wiki/GeneralRules)
     if (isset($data['rc']) && $data['rc']) {
@@ -109,12 +111,9 @@ abstract Class AbstractSecurepass {
   * @param Array $response Reponse from the client
   * @return array|null Response array
   */
-  protected function processResponse(Array $response)
+  protected function processResponse(Array $res)
   {
-    // unset connection specific data
-    unset($response['rc']);
-    unset($response['errorMsg']);
-    return $response;
+    return $res;
   }
 
 }

@@ -25,12 +25,13 @@ class Securepass extends AbstractSecurepass {
   * @return array|null Response array
   * @throws InvalidArgumentException
   */
-  public function user($type, $params) {
+  public function user($type, $params = array()) {
     $command_mapping = array(
       'auth'      => 'UserAuth',
       'info'      => 'UserInfo',
       'add'       => 'UserAdd',
-      'provision' => 'UserProvision'
+      'provision' => 'UserProvision',
+      'list'      => 'UserList'
     );
     if (!isset($command_mapping[$type])) {
       throw new InvalidArgumentException(sprintf('"%s" is not a valid user command.', $type));
