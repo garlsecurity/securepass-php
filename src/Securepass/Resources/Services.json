@@ -32,7 +32,7 @@
           }
       },
       "UserAdd": {
-        "httpMethod": "GET",
+        "httpMethod": "POST",
         "uri": "/api/v1/users/add",
         "summary": "Add a user to the realm",
         "responseClass": "UserAddOutput",
@@ -70,7 +70,7 @@
                 "location": "postField",
                 "description": "Mobile number",
                 "required": true,
-                "sentAs": "mobile"
+                "sentAs": "MOBILE"
            },
            "nin": {
                 "type": "string",
@@ -200,6 +200,24 @@
            "location": "json",
            "type": "boolean"
          }
+      }
+    },
+    "UserAddOutput": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "location": "json",
+          "type": "string"
+        }
+      }
+    },
+    "UserProvisionOutput": {
+      "type": "object",
+      "properties": {
+        "status": {
+            "location": "statusCode",
+            "type": "integer"
+        }
       }
     }
   }

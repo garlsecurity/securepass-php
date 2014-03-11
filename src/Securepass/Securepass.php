@@ -10,36 +10,40 @@
  */
 
 namespace Securepass;
+use Guzzle\Common\Collection;
+use Securepass\Exception\Exception as SecurepassException;
+use Guzzle\Common\Exception\InvalidArgumentException;
 
 class Securepass extends AbstractSecurepass {
 
-  /**
-  * Authenticate the user
+ /**
+  * User API callback
   *
-  * @param string $username Username to authenticate
-  * @param string $secret User secret
+  * @param string $type API call type
+  * @param string $config API parameters
   *
   * @return array|null Response array
+  * @throws InvalidArgumentException
   */
-  public function userAuth($username, $secret)
-  {
-    $command = $this->client->getCommand('UserAuth', array('username' => $username, 'secret' => $secret));
-    $res = $this->execute($command);
-    return $res;
-  }
+  public function user($type, $params) {
+    $command_mapping = array(
+      'auth'      => 'UserAuth',
+      'info'      => 'UserInfo',
+      'add'       => 'UserAdd',
+      'provision' => 'UserProvision'
+    );
+    if (!isset($command_mapping[$type])) {
+      throw new InvalidArgumentException(sprintf('"%s" is not a valid user command.', $type));
+    }
 
-  /**
-  * Get user informations.
-  *
-  * @param string $username Securepass username
-  *
-  * @return array|null Response array
-  */
-  public function userInfo($username)
-  {
-    $command = $this->client->getCommand('UserInfo', array('username' => $username));
-    $res = $this->execute($command);
-    return $res;
+    // check if exists a specific implementation
+    $override_func = 'user' . ucfirst($type);
+    if (function_exists($override_func)) {
+      return $override_func($params);
+    }
+
+    $command = $this->client->getCommand($command_mapping[$type], $params);
+    return $this->execute($command);
   }
 
   /**
