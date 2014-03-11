@@ -7,13 +7,13 @@
           "httpMethod": "GET",
           "uri": "/api/v1/ping",
           "summary": "Ping SecurePass service",
-          "responseClass": "PingOutput"
+          "responseClass": "Securepass\\Response\\Raw"
       },
       "UserAuth": {
           "httpMethod": "POST",
           "uri": "/api/v1/users/auth",
           "summary": "Autenticate user",
-          "responseClass": "UserAuthOutput",
+          "responseClass": "Securepass\\Response\\Raw",
           "parameters": {
               "username": {
                   "type": "string",
@@ -35,7 +35,7 @@
         "httpMethod": "POST",
         "uri": "/api/v1/users/add",
         "summary": "Add a user to the realm",
-        "responseClass": "UserAddOutput",
+        "responseClass": "Securepass\\Response\\Raw",
         "parameters": {
            "username": {
                 "type": "string",
@@ -106,7 +106,7 @@
         "httpMethod": "POST",
         "uri": "/api/v1/users/delete",
         "summary": "Delete a user from the userbase",
-        "responseClass": "UserListOutput",
+        "responseClass": "Securepass\\Response\\Raw",
         "parameters": {
           "username": {
             "type": "string",
@@ -117,11 +117,11 @@
           }
         }
       },
-      "UsersList": {
+      "UserList": {
         "httpMethod": "POST",
         "uri": "/api/v1/users/list",
         "summary": "Show the list of users in a given realm",
-        "responseClass": "UserListOutput",
+        "responseClass": "Securepass\\Response\\Raw",
         "parameters": {
           "realm": {
             "type": "string",
@@ -136,7 +136,7 @@
           "httpMethod": "POST",
           "uri": "/api/v1/users/token/provision",
           "summary": "Provision a token for the given username",
-          "responseClass": "UserProvisionOutput",
+          "responseClass": "Securepass\\Response\\Raw",
           "parameters": {
               "username": {
                 "type": "string",
@@ -158,7 +158,7 @@
           "httpMethod": "POST",
           "uri": "/api/v1/users/info",
           "summary": "Get user information",
-          "responseClass": "UserInfoOutput",
+          "responseClass": "Securepass\\Response\\Raw",
           "parameters": {
               "username": {
                   "type": "string",
@@ -171,55 +171,6 @@
       }
   },
   "models": {
-    "PingOutput": {
-      "type": "object",
-      "properties": {
-        "ip": {
-          "location": "json",
-          "type": "string"
-        },
-        "ip_version": {
-          "location": "json",
-          "type": "string"
-        }
-      }
-    },
-    "UserInfoOutput": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "location": "json",
-          "type": "string"
-        }
-      }
-    },
-    "UserAuthOutput": {
-      "type": "object",
-      "properties": {
-         "authenticated": {
-           "location": "json",
-           "type": "boolean"
-         }
-      }
-    },
-    "UserAddOutput": {
-      "type": "object",
-      "properties": {
-        "username": {
-          "location": "json",
-          "type": "string"
-        }
-      }
-    },
-    "UserProvisionOutput": {
-      "type": "object",
-      "properties": {
-        "status": {
-            "location": "statusCode",
-            "type": "integer"
-        }
-      }
-    }
   }
 }
 
