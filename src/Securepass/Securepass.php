@@ -31,13 +31,15 @@ class Securepass extends AbstractSecurepass {
       'info'      => 'UserInfo',
       'add'       => 'UserAdd',
       'provision' => 'UserProvision',
-      'list'      => 'UserList'
+      'list'      => 'UserList',
+      'delete'    => 'UserDelete'
     );
+
     if (!isset($command_mapping[$type])) {
       throw new InvalidArgumentException(sprintf('"%s" is not a valid user command.', $type));
     }
 
-    // check if exists a specific implementation
+    // check if exists a specific implementation for this command
     $override_func = 'user' . ucfirst($type);
     if (function_exists($override_func)) {
       return $override_func($params);

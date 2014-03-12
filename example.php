@@ -22,4 +22,32 @@ $config['base_url'] = 'http://securepass.local';
 $securepass = new Securepass($options);
 
 $res = $securepass->ping();
-$auth = $securepass->auth(USERNAME, PASSWORD);
+
+/* User operations */
+
+// Authentication
+$auth = array('username' => 'text@example.com',
+              'password' => 'foobar')
+$res = $securepass->user('auth', $auth);
+
+// Create user
+$user = array(
+  'username' => 'foobar',
+  'name'     => 'Foo',
+  'surname'  => 'Bar',
+  'email'    => 'foobar@example.com',
+  'mobile'   => '+395551234567890'
+);
+$res = $securepass->user('create', $user);
+
+// Provision user
+$provision = array(
+  'username' => "foobar@example.com",
+  'swtoken' => "android"
+);
+$res = $securepass->user('provision', $provision);
+
+// List users
+$res = $securepass->user('list');
+
+

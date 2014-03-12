@@ -112,7 +112,7 @@
             "type": "string",
             "location": "postField",
             "description": "Username to be deleted",
-            "required": false,
+            "required": true,
             "sentAs": "USERNAME"
           }
         }
