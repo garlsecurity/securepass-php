@@ -98,7 +98,7 @@ abstract Class AbstractSecurepass {
 
     // Return code value, it is always 0 if returned successfully (https://beta.secure-pass.net/trac/wiki/GeneralRules)
     if (isset($data['rc']) && $data['rc']) {
-      $this->error = 'Something goes wrong, error: "%s"';
+      $this->error = 'Something goes wrong: "%s"';
       $errorMsg = ($data['errorMsg'] ? $data['errorMsg'] : 'Undefined');
       throw new SecurepassException(sprintf($this->error, $errorMsg));
     }
