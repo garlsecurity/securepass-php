@@ -1,5 +1,5 @@
 {
-    "name": "twinbit/securepass-php",
+    "name": "garlsecurity/securepass-php",
     "description":"Securepass SDK for PHP",
     "keywords":["securepass", "sdk"],
     "type":"library",
