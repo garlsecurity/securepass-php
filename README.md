@@ -18,4 +18,8 @@ Contributors are more than welcome, join the mailing list here:
 http://lists.garl.ch/cgi-bin/mailman/listinfo/securepass-tech
 
 
+## Todos
+
+1. Tests
+1. Documentation
 
